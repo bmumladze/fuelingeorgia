@@ -13,78 +13,77 @@ def scrape_data():
     }
     
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get("https://priceshub.ge/conti/result.php", headers=headers)
         response.raise_for_status()
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # PricesHub HTML სტრუქტურა ინახავს ფასებს სპეციფიკურ div-ებში.
-        # cont.js ფაილის მიხედვით, HTML ველები ასეთია:
-        # outputDiv1 - outputDiv7 : Socar (სხვადასხვა ტიპი)
-        # goutputDiv1 - goutputDiv7 : Gulf
-        # woutputDiv1 - woutputDiv7 : Wissol
-        # routputDiv1 - routputDiv5 : Rompetrol
-        # woutputDiv9 - woutputDiv12 : Lukoil
-        
-        def safe_float(div_class):
-            elem = soup.find('div', class_=div_class)
-            if elem and elem.text.strip():
-                try:
-                    return float(elem.text.strip())
-                except ValueError:
+        def get_text(elements, index):
+            if len(elements) > index:
+                try: 
+                    return float(elements[index].text.strip())
+                except: 
                     return None
             return None
+
+        socar_spans = soup.select('b + span')
+        gulf_prices = soup.select('.price_entry .product_price')
+        wissol_prices = soup.select('.wissol-prices li')
+        romp_prices = soup.select('.table-responsive tbody td:nth-of-type(2)')
+        lukoil_prices = soup.select('.luk-prices p')
+        portal_prices = soup.select('.old_fuel_price')
+        connect_prices = soup.select('.connect li')
 
         # მონაცემების ლექსიკონი, companies -> fuel types -> prices
         companies = {
             "Socar": {
-                "Superi": None, # აკლია ძირითადად
-                "Premiumi": safe_float('outputDiv2'), # premiumid 
-                "Regulari": safe_float('outputDiv3'), # regularid
-                "Euro_Dizeli": safe_float('outputDiv5'),
-                "Dizeli": safe_float('outputDiv4')
+                "Superi": get_text(socar_spans, 0),
+                "Premiumi": get_text(socar_spans, 1),
+                "Regulari": get_text(socar_spans, 2),
+                "Euro_Dizeli": get_text(socar_spans, 3),
+                "Dizeli": get_text(socar_spans, 4)
             },
             "Gulf": {
-                "Superi": safe_float('goutputDiv1'), 
-                "Premiumi": safe_float('goutputDiv2'), 
-                "Regulari": safe_float('goutputDiv4'), # regulari
-                "Euro_Dizeli": safe_float('goutputDiv6'),
-                "Dizeli": safe_float('goutputDiv5')
+                "Superi": get_text(gulf_prices, 0), 
+                "Premiumi": get_text(gulf_prices, 1), 
+                "Regulari": get_text(gulf_prices, 3), 
+                "Euro_Dizeli": get_text(gulf_prices, 4),
+                "Dizeli": get_text(gulf_prices, 5)
             },
             "Wissol": {
-                "Superi": safe_float('woutputDiv1'), 
-                "Premiumi": safe_float('woutputDiv2'), 
-                "Regulari": safe_float('woutputDiv3'),
-                "Euro_Dizeli": safe_float('woutputDiv4'),
-                "Dizeli": safe_float('woutputDiv5')
+                "Superi": get_text(wissol_prices, 1), 
+                "Premiumi": get_text(wissol_prices, 3), 
+                "Regulari": get_text(wissol_prices, 9),
+                "Euro_Dizeli": get_text(wissol_prices, 5),
+                "Dizeli": get_text(wissol_prices, 7)
             },
             "Rompetrol": {
-                "Superi": safe_float('routputDiv1'), 
-                "Premiumi": safe_float('routputDiv2'), 
-                "Regulari": safe_float('routputDiv3'),
-                "Euro_Dizeli": safe_float('routputDiv5'),
-                "Dizeli": safe_float('routputDiv4')
+                "Superi": get_text(romp_prices, 0), 
+                "Premiumi": get_text(romp_prices, 1), 
+                "Regulari": get_text(romp_prices, 2),
+                "Euro_Dizeli": get_text(romp_prices, 3),
+                "Dizeli": get_text(romp_prices, 4)
             },
             "Lukoil": {
-                "Superi": safe_float('woutputDiv9'), 
-                "Premiumi": safe_float('woutputDiv10'), 
-                "Regulari": safe_float('woutputDiv11'),
-                "Euro_Dizeli": safe_float('woutputDiv12'),
+                "Superi": get_text(lukoil_prices, 1), 
+                "Premiumi": get_text(lukoil_prices, 2), 
+                "Regulari": get_text(lukoil_prices, 3),
+                "Euro_Dizeli": get_text(lukoil_prices, 4),
                 "Dizeli": None # აკლია
             },
             "Portal": {
-                "Superi": safe_float('woutputDiv13'), 
-                "Premiumi": safe_float('woutputDiv14'), 
-                "Regulari": safe_float('woutputDiv15'),
-                "Euro_Dizeli": safe_float('woutputDiv16'),
-                "Dizeli": safe_float('woutputDiv17')
+                "Superi": get_text(portal_prices, 0), 
+                "Premiumi": get_text(portal_prices, 1), 
+                "Regulari": get_text(portal_prices, 2),
+                "Euro_Dizeli": get_text(portal_prices, 3),
+                "Dizeli": get_text(portal_prices, 4)
             },
             "Connect": {
-                "Superi": None, 
-                "Premiumi": safe_float('coutputDiv1'), 
-                "Regulari": safe_float('coutputDiv2'),
-                "Euro_Dizeli": safe_float('coutputDiv3'),
-                "Dizeli": None 
+                "Superi": get_text(connect_prices, 0), 
+                "Premiumi": get_text(connect_prices, 1), 
+                "Regulari": get_text(connect_prices, 2),
+                "Euro_Dizeli": get_text(connect_prices, 3),
+                "Dizeli": get_text(connect_prices, 4)
             }
         }
         
