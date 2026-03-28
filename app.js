@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 1. ბაზის წამოღება (history.json)
     try {
-        const response = await fetch('history.json');
+        const response = await fetch(`history.json?t=${new Date().getTime()}`);
         if (response.ok) {
             rawData = await response.json();
         }
