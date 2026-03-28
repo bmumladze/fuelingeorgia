@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": "2026-03-28 19",
+    "date": "2026-03-28",
+    "timestamp": "2026-03-28T19:45:14.684066+04:00",
+    "prices": {
+      "Socar": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      },
+      "Gulf": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      },
+      "Wissol": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      },
+      "Rompetrol": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      },
+      "Lukoil": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      },
+      "Portal": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      },
+      "Connect": {
+        "Superi": null,
+        "Premiumi": null,
+        "Regulari": null,
+        "Euro_Dizeli": null,
+        "Dizeli": null
+      }
+    }
+  }
+]
