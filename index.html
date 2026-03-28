@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>საწვავის ფასების ავტომატური მონიტორი | Live Dashboard</title>
+    <!-- Modern Font: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+    </div>
+
+    <div class="glass-container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">⛽</span>
+                <h1>საწვავის ფასები დღეს</h1>
+            </div>
+            <p class="subtitle">მონაცემები ავტომატურად ახლდება ყოველ საათში. წყარო: priceshub.ge</p>
+        </header>
+
+        <section class="controls">
+            <div class="dropdowns">
+                <div class="input-group">
+                    <label for="fuelType">აირჩიეთ საწვავის ტიპი</label>
+                    <select id="fuelType">
+                        <option value="Regulari">რეგულარი</option>
+                        <option value="Premiumi">პრემიუმი</option>
+                        <option value="Superi">სუპერი</option>
+                        <option value="Euro_Dizeli">ევრო დიზელი</option>
+                        <option value="Dizeli">დიზელი</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="comparison-toggles">
+                <span class="compare-title">კომპანიები დასაკვირვებლად</span>
+                <div class="toggles-grid">
+                    <label class="toggle-btn"><input type="checkbox" value="Gulf" checked><span>Gulf</span></label>
+                    <label class="toggle-btn"><input type="checkbox" value="Wissol" checked><span>Wissol</span></label>
+                    <label class="toggle-btn"><input type="checkbox" value="Socar" checked><span>Socar</span></label>
+                    <label class="toggle-btn"><input type="checkbox" value="Rompetrol" checked><span>Rompetrol</span></label>
+                    <label class="toggle-btn"><input type="checkbox" value="Lukoil"><span>Lukoil</span></label>
+                    <label class="toggle-btn"><input type="checkbox" value="Portal"><span>Portal</span></label>
+                    <label class="toggle-btn"><input type="checkbox" value="Connect"><span>Connect</span></label>
+                </div>
+            </div>
+        </section>
+
+        <section class="statistics-cards">
+            <div class="card stat-card main-price">
+                <div class="card-icon">⚡</div>
+                <h3 id="lowestCompanyDisplay">ყველაზე იაფი დღეს (რეგულარი)</h3>
+                <div class="price-value"><span id="lowestPrice">-</span> ₾ <span style="font-size:1rem;color:#94a3b8" id="lowestCompanyNames"></span></div>
+            </div>
+            <div class="card stat-card stat-mom">
+                <h3 class="stat-title">საშუალო ფასი ბაზარზე</h3>
+                <div class="stat-value" id="averagePrice">- ₾</div>
+                <div class="stat-badge badge-neutral" id="trendBadge">საწყისი წერტილი</div>
+            </div>
+            <div class="card stat-card stat-yoy">
+                <h3 class="stat-title">ბაზის ბოლო განახლება</h3>
+                <div class="stat-value" style="font-size:1.5rem;" id="lastUpdated">-</div>
+                <div class="stat-badge badge-down">1 სთ-იანი ციკლი</div>
+            </div>
+        </section>
+
+        <section class="chart-section card">
+            <h2>ფასების ცვლილების ისტორია გამოწერილ კომპანიებში</h2>
+            <div class="chart-wrapper">
+                <canvas id="priceChart"></canvas>
+            </div>
+            <div id="noDataAlert" style="display:none; text-align:center; padding: 20px; color: var(--danger);">
+                მონაცემთა ბაზა ცარიელია. გთხოვთ გაუშვათ `scraper.py` (ან დაელოდოთ GitHub Action-ის პირველ ციკლს).
+            </div>
+        </section>
+
+        <footer>
+            <p>წყარო: PricesHub.Ge (ავტომატური რეზიუმე). საიტი შექმნილია Antigravity-ის მიერ.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
