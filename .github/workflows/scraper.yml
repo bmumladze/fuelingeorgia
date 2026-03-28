@@ -32,5 +32,5 @@ jobs:
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "action@github.com"
           git add history.json
-          git commit -m "Automated data scrape [skip ci]" || exit 0
+          git commit -m "Automated data scrape" || exit 0
           git push
