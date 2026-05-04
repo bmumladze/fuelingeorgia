@@ -31470,5 +31470,61 @@
         "Dizeli": 3.6
       }
     }
+  },
+  {
+    "id": "2026-05-04 06",
+    "date": "2026-05-04",
+    "timestamp": "2026-05-04T06:40:18.711206+04:00",
+    "prices": {
+      "Socar": {
+        "Superi": 3.82,
+        "Premiumi": 3.5,
+        "Regulari": 3.34,
+        "Euro_Dizeli": 3.65,
+        "Dizeli": 3.75
+      },
+      "Gulf": {
+        "Superi": 3.93,
+        "Premiumi": 3.53,
+        "Regulari": 3.37,
+        "Euro_Dizeli": 3.87,
+        "Dizeli": 3.77
+      },
+      "Wissol": {
+        "Superi": 3.92,
+        "Premiumi": 3.52,
+        "Regulari": 3.37,
+        "Euro_Dizeli": 3.82,
+        "Dizeli": 3.77
+      },
+      "Rompetrol": {
+        "Superi": 3.92,
+        "Premiumi": 3.53,
+        "Regulari": 3.39,
+        "Euro_Dizeli": 3.85,
+        "Dizeli": 3.8
+      },
+      "Lukoil": {
+        "Superi": 3.89,
+        "Premiumi": 3.49,
+        "Regulari": 3.34,
+        "Euro_Dizeli": 3.77,
+        "Dizeli": null
+      },
+      "Portal": {
+        "Superi": 3.34,
+        "Premiumi": 3.19,
+        "Regulari": 2.99,
+        "Euro_Dizeli": 3.79,
+        "Dizeli": 3.59
+      },
+      "Connect": {
+        "Superi": 3.55,
+        "Premiumi": 3.2,
+        "Regulari": 3.0,
+        "Euro_Dizeli": 3.9,
+        "Dizeli": 3.6
+      }
+    }
   }
 ]
